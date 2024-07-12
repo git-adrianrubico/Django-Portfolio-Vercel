@@ -1,0 +1,56 @@
+<section id="portfolio" class="portfolio">
+    <div class="container">
+      <div class="section-title">
+        <h2>Portfolio</h2>
+        <p>My Works</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-project">Project</li>
+            <li data-filter=".filter-certification">Certification</li>
+            <li data-filter=".filter-badge">Badge</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row portfolio-container">
+        {% for portfolio_items in portfolio %}
+        <div class="portfolio-box portfolio-item {{ portfolio_items.filter }}">
+            <div class="img-wrapper">
+              <a
+                data-fancybox
+                data-src="{{ portfolio_items.photo.url }}"
+                data-caption="{{ portfolio_items.name }}"
+              >
+              <img
+                src="{{ portfolio_items.photo.url }}"
+                class="img-inner"
+                alt="{{ portfolio_items.name }} Image"
+                loading="lazy"
+                style="{{ portfolio_items.object_fit }}"
+              />
+              </a>
+            </div>
+            <div class="protect-imgwrapper">
+              <h5><b>{{ portfolio_items.name }}</b></h5>
+            </div>
+            <div class="imgwrapper-link">
+              {% if portfolio_items.link1 and portfolio_items.link2 %}
+                <a href="{{ portfolio_items.link1 }}" target="_blank">
+                  <i class="fa-regular fa-code fa-sm"></i> Code
+                </a>
+                <a href="{{ portfolio_items.link2 }}" target="_blank">
+                  <i class="fa-solid fa-eye fa-sm"></i> View
+                </a>
+              {% else %}
+                <a href="{{ portfolio_items.link3 }}" target="_blank">
+                  <i class="fa-regular fa-circle-check fa-sm"></i> Verify
+                </a>
+              {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section> 

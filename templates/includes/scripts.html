@@ -1,0 +1,74 @@
+{% load static %}
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js'%}"></script>
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<!-- Vendor JS Files -->
+<script
+  src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"
+  defer
+></script>
+<!-- Fancybox Script -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script>
+  Fancybox.bind('[data-fancybox]', {
+    //
+  });    
+</script>
+<!-- Jquery Script -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<!-- End Scripts Section -->
+
+<script>
+  window.enableFormSubmit = () => {
+    const submitButton = document.querySelector("[data-callback='enableFormSubmit']").closest("form").querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.removeAttribute("disabled");
+    }
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('.php-email-form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      // Show loading spinner
+      const loadingIndicator = document.querySelector('.loading');
+      if (loadingIndicator) {
+        loadingIndicator.style.display = 'block';
+      }
+      // Your AJAX request here
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Hide loading spinner
+          if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+          }
+          if (data.status === 'success') {
+            // Update the HTML based on the success response
+            const successMessage = document.querySelector('.sent-message');
+            if (successMessage) {
+              successMessage.style.display = 'block';
+            }
+            // Reset the form
+            form.reset();
+            // Reset reCAPTCHA
+            grecaptcha.reset();
+          } else {
+            // Handle errors if needed
+            console.error(data.errors);
+          }
+        })
+        .catch(error => {
+          // Hide loading spinner in case of an error
+          const loadingIndicator = document.querySelector('.loading');
+          if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+          }
+          console.error('Error:', error);
+        });
+    });
+  });
+</script>

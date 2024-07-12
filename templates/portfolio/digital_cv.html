@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Adrian Rubico | Digital CV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="I am a seasoned Technology Support Engineer with a strong foundation in Linux administration, cloud technology, automation, and self taught full stack developer."
+    />
+    <meta
+      name="keywords"
+      content="Adrian Rubico, cloud engineer, web development, Linux, DevOps, Automation, full-stack developer, Cybersecurity, security"
+    />
+    <meta name="author" content="Adrian Rubico" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.ico' %}" rel="icon"/>
+    <link href="{% static 'assets/img/apple-touch-icon.ico' %}" rel="apple-touch-icon" />
+
+    <!--========== BOX ICONS ==========-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="{% static 'assets/css/styles_cv.css' %}">
+</head>
+<body>
+    <!--========== HEADER ==========-->
+    <header class=" l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav__logo">Adrian</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link">
+                            <i class='bx bx-home nav__icon'></i>Home
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#profile" class="nav__link">
+                            <i class='bx bx-user nav__icon'></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#education" class="nav__link">
+                            <i class='bx bx-book nav__icon'></i>Education
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            <i class='bx bx-receipt nav__icon'></i>Skills
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#experience" class="nav__link">
+                            <i class='bx bx-briefcase-alt nav__icon'></i>Experience
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#certificates" class="nav__link">
+                            <i class='bx bx-award nav__icon'></i>Certificates
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-grid-alt'></i>
+            </div>
+        </nav>
+    </header>
+    <main class="l-main bd-container">
+        <!-- All elements within this div, is generated in PDF -->
+        <div class="resume" id="area-cv">
+            <div class="resume__left">
+                {% for personal_info in personal %}
+                <!--========== HOME ==========-->
+                <section class="home" id="home">
+                    <div class="home__container section bd-grid">
+                        <div class="home__data bd-grid">
+                            <h1 class="home__title"><b>{{ personal_info.name }}</b></h1>
+                            <h3 class="home__profession">{{ personal_info.role }}</h3>
+                            <!-- View CV -->
+                            <div>
+                                <a href="{{ personal_info.cv_link }}" target="_blank"
+                                    class="home__button-movil">Download</a>
+                            </div>
+                        </div>
+                        <div class="home__address bd-grid">
+                            <span class="home__information">
+                                <i class='bx bx-map home__icon'></i> {{ personal_info.location }}
+                            </span>
+                            <a href="mailto:rubico.adrian@gmail.com" target="_black" class="home__information">
+                                <i class='bx bx-envelope home__icon'></i> {{ personal_info.email }}
+                            </a>
+                            <a href="tel:+639219607099" target="_black" class="home__information">
+                                <i class='bx bx-phone home__icon'></i> {{ personal_info.phone }}
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Theme change button -->
+                    <i class="bx bx-moon change-theme" title="Theme" id="theme-button"></i>
+                    <a title="Download PDF" class="bx bx-download generate-pdf"
+                        href="{{ personal_info.cv_link }}" target="_blank"></a>
+                </section>
+                <!--========== SOCIAL ==========-->
+                <section class="social section">
+                    <h2 class="section-title">SOCIAL</h2>
+
+                    <div class="social__container bd-grid">
+                        <a href="{{ personal_info.linkedin }}" target="_blank" class="social__link">
+                            <i class='bx bxl-linkedin-square social__icon'></i> @username
+                        </a>
+
+                        <a href="{{ personal_info.github }}" target="_blank" class="social__link">
+                            <i class='bx bxl-github social__icon'></i> @username
+                        </a>
+                    </div>
+                </section>
+                <!--========== PROFILE ==========-->
+                <section class="profile section" id="profile">
+                    <h2 class="section-title">Profile</h2>
+                    <p class="profile__description">
+                        {{ personal_info.cv_description }}
+                    </p>
+                </section>
+                {% endfor %}
+                <!--========== EDUCATION ==========-->
+                <section class="education section" id="education">
+                    <h2 class="section-title">Education</h2>
+                    {% for education_info in education %}
+                    <div class="education__container bd-grid">
+                        <div class="education__content">
+                            <div class="education__time">
+                                <span class="education__rounder"></span>
+                                <span class="education__line"></span>
+                            </div>
+                            <div class="education__data bd-grid">
+                                <h3 class="education__title">{{ education_info.degree }}</h3>
+                                <span class="education__studies">{{ education_info.school_name }}</span>
+                                <span class="education__year">
+                                    {{ education_info.date_range  }} - 
+                                    {% if education_info.is_current %}
+                                    Present
+                                    {% else %}
+                                    {{ education_info.formatted_end_date }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </section>
+                <!--========== SKILLS  ==========-->
+                <section class="skills section hide" id="skills">
+                    <h2 class="section-title">Skills</h2>
+
+                    <div class="skills__content bd-grid">
+                        {% for technologies_skills in technologies %}
+                        <div class="skills__name">
+                            <span class="skills__circle"></span> {{ technologies_skills.name }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a href="#" class="skills-button" id="skills-button">See More</a>
+                </section>
+            </div>
+            <div class="resume__right">
+                <!--========== EXPERIENCE ==========-->
+                <section class="experience section" id="experience">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="experience__container bd-grid">
+                        {% for experience in experiences %}
+                        <div class="experience__content">
+                            <div class="experience__time">
+                                <span class="experience__rounder"></span>
+                                <span class="experience__line"></span>
+                            </div>
+                            <div class="experience__data bd-grid">
+                                <h3 class="experience__title"><strong>{{ experience.title }}</strong></h3>
+                                <span class="experience__company">
+                                    {{ experience.formatted_start_date }} - 
+                                    {% if experience.is_current %}
+                                    Present
+                                    {% else %}
+                                    {{ experience.formatted_end_date }}
+                                    {% endif %}
+                                    | {{ experience.company }}
+                                </span>
+                                <ul class="experience__list">
+                                    {% for description in experience.descriptions.all|dictsort:"order_number" %}
+                                    <li class="experience__description">
+                                        <span class="experience__circle"></span>
+                                        <div>{{ description.text }}</div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="experience__technologies">
+                                    <span>Technologies used</span>
+                                    <ul class="experience__technologies-list">
+                                        {% for technology in experience.technologies.all %}
+                                        <li class="experience__technologies-item">{{ technology.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                <!--========== CERTIFICATES ==========-->
+                <section class="certificate section" id="certificates">
+                    <h2 class="section-title">Certificates</h2>
+
+                    <div class="certificate__container bd-grid">
+                        {% for issuer, portfolio_group in grouped_portfolio.items %}
+                            
+                            <div class="certificate__content bd-grid">
+                                {% for portfolio_info in portfolio_group %}
+                                    <h3 class="certificate__title">{{ portfolio_info.name }} ({{ portfolio_info.year }}) <a class="nav__linkcert" href="{{ portfolio_info.link3 }}" target="_blank"><i class='bx bx-link-external'></i></a></h3>
+                                {% endfor %}
+                                <span class="certificate__company">{{ issuer }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                <!--========== INTERESTS ==========-->
+                <section class="interests section">
+                    <h2 class="section-title">Interests</h2>
+                    <div class="interests__container bd-grid">
+                        <div class="interests__content">
+                            <i class="bx bx-headphone interests__icon"></i>
+                            <span class="interests__name">Music</span>
+                        </div>
+                        <div class="interests__content">
+                            <i class="bx bx-coffee interests__icon"></i>
+                            <span class="interests__name">Cofee</span>
+                        </div>
+                        <div class="interests__content">
+                            <i class="bx bxs-plane-alt interests__icon"></i>
+                            <span class="interests__name">Travel</span>
+                        </div>
+                        <div class="interests__content">
+                            <i class="bx bx-book interests__icon"></i>
+                            <span class="interests__name">Read</span>
+                        </div>
+                        <div class="interests__content">
+                            <i class='bx bx-pyramid interests__icon'></i>
+                            <span class="interests__name">Puzzle solver</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <p class="updated">Updated: Oct 15, 2023</p>
+    </main>
+    <!--========== SCROLL TOP ==========-->
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class='bx bx-up-arrow-alt scrollttop__icon'></i>
+    </a>
+    <!--========== MAIN JS ==========-->
+    <script src="{% static 'assets/js/main_cv.js' %}"></script>
+</body>
+</html>

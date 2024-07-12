@@ -1,0 +1,46 @@
+{% load static %}
+<header id="header">
+  <div class="container">
+    <div class="data-row" >
+      {% for personal_info in personal %}
+      <h1><a href="/">Name Here</a></h1>
+      <h2>
+        {{ personal_info.mini_description|safe }}
+      </h2>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link active" href="#header">Home</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+          <li><a href="{% url 'digital_cv' %}" target="_blank">Digital CV <i class="fa-regular fa-paper-plane"></i></a></li>
+        </ul>
+        <i class="fa-solid fa-bars mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+
+      <div class="social-links">
+        <a href="{{ personal_info.github }}" class="github" target="_blank"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a
+          href="{{ personal_info.linkedin }}"
+          class="linkedin"
+          target="_blank"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+      </div>
+    </div>
+    <div class="col-lg-4 profileImg" id="profile-image">
+
+      <img
+        src="{{ personal_info.photo.url }}"
+        class="img-fluid avatar profileImgInner"
+        loading="lazy"
+        alt="Image of Adrian Rubico"
+      />
+    </div>
+    {% endfor %}
+  </div>
+</header>

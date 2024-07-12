@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Title Here</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="description here"
+    />
+    <meta
+      name="keywords"
+      content="Keywords here"
+    />
+    <meta name="author" content="name here" />
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.ico' %}" rel="icon"/>
+    <link href="{% static 'assets/img/apple-touch-icon.ico' %}" rel="apple-touch-icon" />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/eca479fe41.js" crossorigin="anonymous"></script>
+    <!-- AOS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <!-- Vendor CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <!-- Fancybox CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="preload"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <!-- Floating Circles -->
+
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  
+
+    {% block content %}
+
+    {% endblock content %} 
+    
+    <!-- ======= Scripts Section ======= -->
+    {% include 'includes/scripts.html' %}
+  </body>
+</html>
