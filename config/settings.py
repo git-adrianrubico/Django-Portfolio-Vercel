@@ -10,12 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-import dj_database_url
 from pathlib import Path
-from dotenv import dotenv_values
-#from decouple import config
-
-env_vars = dotenv_values()
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,16 +26,15 @@ import cloudinary.api
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = config("SECRET_KEY")
-SECRET_KEY = 'o0%(pn0)@s68h!w34!k%aoop78xi!@g!48!nll%f7!wr1u!mkn'
-#SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = ['.vercel.app']
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app']
 #ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
@@ -109,8 +104,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # For Dev
-EMAILHOST_USER = env_vars.get("EMAIL_HOST_USER")
-EMAILHOST_PASSWD = env_vars.get("EMAIL_HOST_PASSWORD")
+EMAILHOST_USER = config("EMAIL_HOST_USER")
+EMAILHOST_PASSWD = config("EMAIL_HOST_PASSWORD")
 
 # For Prod
 #EMAILHOST_USER = os.environ.get("EMAIL_HOST_USER")
@@ -190,17 +185,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # For Dev
-RECAPTCHA_PUBLIC_KEY = env_vars.get("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = env_vars.get("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
 
 # For Prod
 # RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
 # RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
 
 # For Dev
-CLOUDINARY_CLOUDNAME = env_vars.get("CLOUD_NAME")
-CLOUDINARY_APIKEY = env_vars.get("CLOUD_API_KEY")
-CLOUDINARY_SECRET = env_vars.get("CLOUD_API_SECRET")
+CLOUDINARY_CLOUDNAME = config("CLOUD_NAME")
+CLOUDINARY_APIKEY = config("CLOUD_API_KEY")
+CLOUDINARY_SECRET = config("CLOUD_API_SECRET")
 
 # For PROD
 # CLOUDINARY_CLOUDNAME = os.environ.get("CLOUD_NAME")
