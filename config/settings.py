@@ -25,18 +25,16 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = False
 
 # Development
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']
 
 # Production
-# ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
-    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.portfolio',
     'ckeditor',
-    'cloudinary',
     'django_recaptcha',
     'whitenoise',
 ]

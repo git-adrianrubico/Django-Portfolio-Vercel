@@ -2,11 +2,8 @@ asgiref==3.7.2
 beautifulsoup4==4.12.2
 certifi==2023.7.22
 charset-normalizer==3.3.2
-cloudinary==1.36.0
-dj-database-url==2.1.0
-Django==4.2.7
+Django==5.0.7
 django-ckeditor==6.7.0
-django-cloudinary-storage==0.3.0
 django-htmlmin==0.11.0
 django-js-asset==2.1.0
 django-ranged-response==0.2.0
