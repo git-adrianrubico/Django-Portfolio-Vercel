@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     # For Dev only
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include("apps.portfolio.urls")),
 ]
 

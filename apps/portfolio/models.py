@@ -1,6 +1,5 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-#from cloudinary.models import CloudinaryField
 
 class Personal(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -8,7 +7,6 @@ class Personal(models.Model):
     mini_description = models.TextField(max_length=500, blank=True, null=True)
     cv_description = models.TextField(max_length=500, blank=True, null=True)
     cv_link = models.URLField(blank=True, null=True)
-    #photo = CloudinaryField('profile_pic/main')
     photo = models.ImageField(upload_to='profile_pics/main', blank=True, null=True)
     github = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
@@ -22,7 +20,6 @@ class Personal(models.Model):
     
 class About(models.Model):
     description = RichTextField(blank=True, null=True)
-    #photo = CloudinaryField('profile_pic/about')
     photo = models.ImageField(upload_to='profile_pics/about', blank=True, null=True)
     
 class Education(models.Model):
@@ -127,17 +124,6 @@ class Portfolio(models.Model):
     issuer = models.ForeignKey(Issuing_Organization, on_delete=models.CASCADE, null=True, blank=True)
     year = models.CharField(max_length=4, null=True, blank=True)
     object_fit = models.CharField(max_length=100, null=True, blank=True)
-    
-    
-    # def get_cloudinary_folder(self):
-    #     if self.filter == 'filter-project':
-    #         return 'portfolio/project'
-    #     elif self.filter == 'filter-certification':
-    #         return 'portfolio/certification'
-    #     elif self.filter == 'filter-badge':
-    #         return 'portfolio/badge'
-
-    #photo = CloudinaryField(folder=get_cloudinary_folder)
     
     def get_upload_to(self, filename):
         if self.filter == 'filter-project':
