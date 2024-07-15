@@ -3,7 +3,7 @@
   <div class="container">
     <div class="data-row" >
       {% for personal_info in personal %}
-      <h1><a href="/">Name Here</a></h1>
+      <h1><a href="/">{{ personal_info.name }}</a></h1>
       <h2>
         {{ personal_info.mini_description|safe }}
       </h2>

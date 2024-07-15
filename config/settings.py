@@ -17,10 +17,6 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Cloudinary imports
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,14 +24,15 @@ import cloudinary.api
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-#ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['.vercel.app']
-#ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# Development
+ALLOWED_HOSTS = []
+
+# Production
+# ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -108,6 +105,7 @@ EMAILHOST_USER = config("EMAIL_HOST_USER")
 EMAILHOST_PASSWD = config("EMAIL_HOST_PASSWORD")
 
 # For Prod
+
 #EMAILHOST_USER = os.environ.get("EMAIL_HOST_USER")
 #EMAILHOST_PASSWD = os.environ.get("EMAIL_HOST_PASSWORD")
 
@@ -127,8 +125,8 @@ DATABASES = {
     }
 }
 
-#database_url = os.environ.get("DATABASE_URL")
-#DATABASES["default"] = dj_database_url.parse(database_url, conn_max_age=600)
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES["default"] = dj_database_url.parse(database_url, conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -148,33 +146,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Manila'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
 STATIC_URL = '/static/'
-
-if DEBUG is False:
-    STATICFILES_DIRS = [ BASE_DIR / 'static' ]
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    
-else:
-    STATICFILES_DIRS = [
+STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
-    ]
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
+]
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
@@ -184,32 +170,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# For Dev
 RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
-
-# For Prod
-# RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
-# RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
-
-# For Dev
-CLOUDINARY_CLOUDNAME = config("CLOUD_NAME")
-CLOUDINARY_APIKEY = config("CLOUD_API_KEY")
-CLOUDINARY_SECRET = config("CLOUD_API_SECRET")
-
-# For PROD
-# CLOUDINARY_CLOUDNAME = os.environ.get("CLOUD_NAME")
-# CLOUDINARY_APIKEY = os.environ.get("CLOUD_API_KEY")
-# CLOUDINARY_SECRET = os.environ.get("CLOUD_API_SECRET")
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': CLOUDINARY_CLOUDNAME,
-    'API_KEY': CLOUDINARY_APIKEY,
-    'API_SECRET': CLOUDINARY_SECRET,
-}
-
-cloudinary.config(
-    cloud_name = CLOUDINARY_CLOUDNAME,
-    api_key = CLOUDINARY_APIKEY,
-    api_secret = CLOUDINARY_SECRET,
-)

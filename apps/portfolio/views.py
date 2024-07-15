@@ -20,6 +20,7 @@ class HomePageView(TemplateView):
         context['portfolio'] = Portfolio.objects.all()
         context['contact_form'] = ContactForm()
         context['message_sent'] = False
+        context['website_title'] = Personal.objects.first()
         return context
     
     def post(self, request, *args, **kwargs):
@@ -67,6 +68,7 @@ class DigitalCVPageView(TemplateView):
         context['portfolio'] = Portfolio.objects.filter(
             Q(filter='filter-certification')
         )
+        context['website_title'] = Personal.objects.first()
         
         grouped_portfolio = {}
         portfolios = sorted(context['portfolio'], key=attrgetter('year'), reverse=True) 
