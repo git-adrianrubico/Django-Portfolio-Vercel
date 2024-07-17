@@ -3,7 +3,9 @@
     <small>
         &copy; 2023
         <a href="#">
-            Name Here
+            {% for personal_info in personal %}
+            {{ personal_info.name }}
+            {% endfor %}
         </a>
         All rights reserved.
     </small>

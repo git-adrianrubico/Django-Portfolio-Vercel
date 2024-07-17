@@ -27,10 +27,10 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
 # Development
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 # Production
-#ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -96,21 +96,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# For Dev
-EMAILHOST_USER = config("EMAIL_HOST_USER")
-EMAILHOST_PASSWD = config("EMAIL_HOST_PASSWORD")
-
-# For Prod
-
-#EMAILHOST_USER = os.environ.get("EMAIL_HOST_USER")
-#EMAILHOST_PASSWD = os.environ.get("EMAIL_HOST_PASSWORD")
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = EMAILHOST_USER
-EMAIL_HOST_PASSWORD = EMAILHOST_PASSWD
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -120,9 +111,6 @@ DATABASES = {
         "NAME" : BASE_DIR / "db.sqlite3",
     }
 }
-
-# database_url = os.environ.get("DATABASE_URL")
-# DATABASES["default"] = dj_database_url.parse(database_url, conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
